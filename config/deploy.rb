@@ -8,9 +8,10 @@ set :deploy_to,     "/home/deploy/public_html/#{application}"
 
 set :user,          'deploy'
 set :group,         'users'
+set :use_sudo,      false
 
-set :repository,            "git@github.com:r38y/isitspringyet.git"
-set :scm,                   "git"
+set :repository,  "git@github.com:r38y/isitspringyet.git"
+set :scm,         "git"
 set :branch,      "master"
 
 ssh_options[:keys]          = %w(/Users/randy/.ssh/id_rsa)
