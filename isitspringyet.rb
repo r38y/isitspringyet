@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
-DATES = YAML.load_file("dates.yml")
+require 'timeout'
+require 'net/http'
 
 get '/' do
   @hemisphere = request.cookies["h"]
@@ -18,8 +19,9 @@ get '/' do
       @hemisphere = 'n'
     end
   end
-  set_cookie("h", {:value => @hemisphere, :expires => (Time.now + 10*365*24*60*60)})
-  starts, ends = *DATES["#{Date.today.year}#{@hemisphere}"]
+  response.set_cookie("h", {:value => @hemisphere, :expires => (Time.now + 10*365*24*60*60)})
+  dates = YAML.load_file("dates.yml")
+  starts, ends = *dates["#{Date.today.year}#{@hemisphere}"]
   @spring = Date.today >= starts && date.today < ends ? 'yes' : 'no'
   erb :index
 end
