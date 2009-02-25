@@ -9,11 +9,10 @@ get '/' do
     Timeout::timeout(3) do
       @latlng = Net::HTTP.get "tinygeocoder.com", "/create-api.php?q=#{remote_ip}"
     end
+    @lat, @lng = *@latlng.split(",")
+    @hemisphere = @lat.to_f > 0 ? 'northern' : 'southern'
   rescue Timeout::Error
-    "there was a problem"
+    @hemisphere = 'northern'
   end
-  @lat, @lng = *@latlng.split(",")
-  @hemisphere = @lat.to_f > 0 ? 'northern' : 'southern'
   erb :index
-  
 end
