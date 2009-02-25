@@ -6,10 +6,10 @@ h1 {
 	margin: 0;
 	padding: 0;
 	text-align: center;
+	font-weight: normal;
 }
 p {
 	text-align: center;
-	
 }
 p, a {
 	color: #BBB;
