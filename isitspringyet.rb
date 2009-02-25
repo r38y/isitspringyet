@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'sinatra'
-require 'net/http'
 
 get '/' do
   remote_ip = env['REMOTE_ADDR']
@@ -10,9 +9,12 @@ get '/' do
       @latlng = Net::HTTP.get "tinygeocoder.com", "/create-api.php?q=#{remote_ip}"
     end
     @lat, @lng = *@latlng.split(",")
-    @hemisphere = @lat.to_f > 0 ? 'northern' : 'southern'
+    @hemisphere = @lat.to_f > 0 ? 'n' : 's'
   rescue Timeout::Error
-    @hemisphere = 'northern'
+    @hemisphere = 'n'
   end
+  dates = YAML.load_file("dates.yml")
+  starts, ends = *dates["#{Date.today.year}#{@hemisphere}"]
+  @spring = Date.today >= starts && date.today < ends ? 'yes' : 'no'
   erb :index
 end

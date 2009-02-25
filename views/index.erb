@@ -6,13 +6,7 @@
 		<link href="/stylesheets/main.css" media="screen" rel="stylesheet" type="text/css" />
 	</head>
 	<body class="n">
-		<h1>maybe?</h1>
-		<p>Hemisphere: <a href="#" class="n">Northern</a> -or- <a href="#" class="s">Southern</a></p>
-				<pre>
-		Latitude: <%= @lat %>
-		Longitude: <%= @lng %>
-		Hemisphere: <%= @hemisphere %>
-				</pre>
-		
+		<h1><%= @spring %></h1>
+		<p>Hemisphere: <a href="?h=n" class="n">Northern</a> -or- <a href="?h=s" class="s">Southern</a></p>		
 	</body>
 </html>
