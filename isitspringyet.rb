@@ -3,12 +3,12 @@ require 'sinatra'
 require 'timeout'
 require 'net/http'
 
-get '/' do
+get '/*' do
   @hemisphere = request.cookies["h"]
-  @hemisphere = params["h"] unless params['h'].nil?
+  @hemisphere = params[:splat].first
   if @hemisphere.nil? || @hemisphere.empty?
     remote_ip = env['REMOTE_ADDR']
-    # remote_ip = '208.75.85.206'
+    remote_ip = '208.75.85.206'
     begin
       Timeout::timeout(3) do
         @latlng = Net::HTTP.get "tinygeocoder.com", "/create-api.php?q=#{remote_ip}"
