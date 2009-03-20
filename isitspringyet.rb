@@ -22,6 +22,6 @@ get '/*' do
   response.set_cookie("h", {:value => @hemisphere, :expires => (Time.now + 10*365*24*60*60)})
   dates = YAML.load_file("dates.yml")
   starts, ends = *dates["#{Date.today.year}#{@hemisphere}"]
-  @spring = Date.today >= starts && date.today < ends ? 'yes' : 'no'
+  @spring = Date.today >= starts && Date.today < ends ? 'yes' : 'no'
   erb :index
 end
