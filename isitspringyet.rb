@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'timeout'
 require 'net/http'
+require 'yaml'
 
 get '/*' do
   @hemisphere = request.cookies["h"]
